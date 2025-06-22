@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>Add commentMore actions
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,14 +9,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
-      background: linear-gradient(270deg, #d4fc79, #96e6a1);
-      background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      background-color: #f4f4f4;
     }
     h1 {
       text-align: center;
@@ -67,8 +60,6 @@
     <canvas id="wasteChart" height="100"></canvas>
   </div>
 
-  <audio id="alertSound" src="https://cdn.pixabay.com/audio/2022/10/05/audio_c2e17ac77d.mp3" preload="auto"></audio>
-
   <script>
     const foodList = JSON.parse(localStorage.getItem("foodList") || "[]");
     const table = document.getElementById("foodTable");
@@ -82,13 +73,10 @@
         const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
 
         const row = document.createElement("tr");
-        if (diff <= 3) {
-          row.classList.add("near-expiry");
-          document.getElementById("alertSound").play();
-        }
+        if (diff <= 3) row.classList.add("near-expiry");
 
         row.innerHTML = `
-          <td>🍎 ${item.name}</td>
+          <td>${item.name}</td>
           <td>${item.quantity}</td>
           <td>${item.expiry}</td>
           <td>${diff}</td>
@@ -104,8 +92,7 @@
       const name = document.getElementById("foodName").value;
       const quantity = document.getElementById("quantity").value;
       const expiry = document.getElementById("expiryDate").value;
-      const isValidDate = expiry && !isNaN(new Date(expiry).getTime());
-      if (!name || !quantity || !isValidDate) return alert("Fill all fields with valid data.");
+      if (!name || !quantity || !expiry) return alert("Fill all fields.");
 
       foodList.push({ name, quantity, expiry });
       renderTable();
@@ -141,4 +128,4 @@
     drawChart();
   </script>
 </body>
-</html>
+</html>Add comment
